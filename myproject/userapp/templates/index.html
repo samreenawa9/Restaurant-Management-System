@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+
+   {% for restaurant in restaurants %}
+  <div class="row restaurant-card mb-4">
+    {% if forloop.counter|divisibleby:2 %}
+      <div class="col-md-6 restaurant-details">
+        <h2 class="restaurant-name">{{ restaurant.name }}</h2>
+        <p class="restaurant-intro">
+          Are you ready to order, or do you have any questions about the menu?
+        </p>
+        <p class="restaurant-cuisine">
+          <b>Service options:</b> {{ restaurant.service_options }}
+        </p>
+        <p class="restaurant-address">
+          Address: {{ restaurant.address }}
+        </p>
+        <p><strong>Contact:</strong> {{ restaurant.contact }}</p>
+        <p><strong>Status:</strong> {{ restaurant.staus }}</p>
+        <a href="{% url 'show_menu' restaurant.id %}" class="btn btn-primary restaurant-btn">View Menu</a>
+      </div>
+      <div class="col-md-6 restaurant-image-container">
+        {% if restaurant.image %}
+          <img src="{{ restaurant.image.url }}" alt="Restaurant Image" class="img-fluid restaurant-img">
+        {% else %}
+          <img src="{% static 'images/default_img.webp' %}" alt="Restaurant Image" class="img-fluid restaurant-img">
+        {% endif %}
+      </div>
+    {% else %}
+      <div class="col-md-6 restaurant-image-container">
+        {% if restaurant.image %}
+  <img src="{{ restaurant.image.url }}" alt="Restaurant Image" class="img-fluid restaurant-img">
+{% else %}
+  <img src="{% static 'images/default_img.webp' %}" alt="Restaurant Image" class="img-fluid restaurant-img">
+{% endif %}
+      </div>
+      <div class="col-md-6 restaurant-details">
+        <h2 class="restaurant-name">{{ restaurant.name }}</h2>
+        <p class="restaurant-intro">
+          Are you ready to order, or do you have any questions about the menu?
+        </p>
+        <p class="restaurant-cuisine">
+          <b>Service options:</b> {{ restaurant.service_options }}
+        </p>
+        <p class="restaurant-address">
+          Address: {{ restaurant.address }}
+        </p>
+        {% comment %} <p><strong>Contact:</strong> {{ restaurant.contact }}</p> {% endcomment %}
+        <p><strong>Status:</strong> {{ restaurant.staus }}</p>
+        <a href="{% url 'show_menu' restaurant.id %}" class="btn btn-primary restaurant-btn">View Menu</a>
+      </div>
+    {% endif %}
+  </div>
+{% empty %}
+  <p>No restaurants added yet.</p>
+{% endfor %}
+</div>
+
+{% endblock %}
+   

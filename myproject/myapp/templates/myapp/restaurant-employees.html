@@ -1,0 +1,51 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 1100px; margin: 40px auto;">
+    <h2 style="text-align: center; margin-bottom: 25px;">Manage Employees</h2>
+
+    <form method="post" style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 30px;">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Employee Name" required style="padding: 10px; border: 1px solid #ccc; border-radius: 8px; flex: 1 1 200px;">
+        <input type="text" name="role" placeholder="Role (e.g., Waiter)" required style="padding: 10px; border: 1px solid #ccc; border-radius: 8px; flex: 1 1 200px;">
+        <input type="number" name="contact" placeholder="Contact" required style="padding: 10px; border: 1px solid #ccc; border-radius: 8px; flex: 1 1 200px;">
+        <input type="email" name="email" placeholder="Email (e.g., abc@gmail.com)" required style="padding: 10px; border: 1px solid #ccc; border-radius: 8px; flex: 1 1 200px;">
+        <select name="restaurant" required style="padding: 10px; border: 1px solid #ccc; border-radius: 8px; flex: 1 1 200px;">
+            <option value="">Select Restaurant</option>
+            {% for r in restaurants %}
+                <option value="{{ r.id }}">{{ r.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" style="background: #f4b400; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer;">Add Employee</button>
+    </form>
+
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="padding: 12px; border: 1px solid #ddd; background-color: #f2f2f2;">Name</th>
+                <th style="padding: 12px; border: 1px solid #ddd; background-color: #f2f2f2;">Role</th>
+                <th style="padding: 12px; border: 1px solid #ddd; background-color: #f2f2f2;">Contact</th>
+                <th style="padding: 12px; border: 1px solid #ddd; background-color: #f2f2f2;">Email</th>
+                <th style="padding: 12px; border: 1px solid #ddd; background-color: #f2f2f2;">Restaurant</th>
+                <th style="padding: 12px; border: 1px solid #ddd; background-color: #f2f2f2;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for e in employees %}
+            <tr>
+                <td style="padding: 12px; border: 1px solid #ddd;">{{ e.name }}</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">{{ e.role }}</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">{{ e.contact }}</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">{{ e.email }}</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">{{ e.restaurant.name }}</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">
+                    <a href="{% url 'edit_employee' e.id %}" class="action-btn edit-btn" style="padding: 6px 12px; border: none; border-radius: 5px; background: #007bff; color: white; cursor: pointer;">Edit</a>
+                    <a href="{% url 'delete_employee' e.id %}" class="action-btn delete-btn" style="padding: 6px 12px; border: none; border-radius: 5px; background: #dc3545; color: white; cursor: pointer;">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

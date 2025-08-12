@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+
+  <h2 class="mb-4 text-center">All Restaurants' Menus</h2>
+
+  {% if menus %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Restaurant</th>
+            <th>Item Name</th>
+            <th>Description</th>
+            <th>Price (Rs)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in menus %}
+            <tr>
+              <td>{{ item.restaurant.name }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.description }}</td>
+              <td>{{ item.price }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-warning text-center">No menu items available across restaurants.</div>
+  {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>All Table Bookings</h2>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Customer Name</th>
+                <th>Contact</th>
+                <th>Restaurant</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>No. of Guests</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for b in bookings %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ b.customer_name }}</td>
+                <td>{{ b.contact }}</td>
+                <td>{{ b.restaurant.name }}</td>
+                <td>{{ b.booking_date }}</td>
+                <td>{{ b.booking_time }}</td>
+                <td>{{ b.guests }}</td> 
+            </tr>
+            {% empty %}
+            <tr><td colspan="7">No bookings yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

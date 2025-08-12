@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<body>
+  <input type="hidden" id="csrtToken" value="{{ csrf_token }}">
+  <div id="signinPage">
+    <div class="form-container">
+      <h2>Sign In to Your Account</h2>
+
+      <form method="POST">
+  {% csrf_token %}
+  <input type="text" name="username" placeholder="Email or Username" required>
+  <input type="password" name="password" placeholder="Password" required>
+  <button type="submit">Login</button>
+</form>
+
+      <hr />
+
+      <h3>Create Admin Account</h3>
+      <input type="text" id="regUsername" placeholder="New Username" />
+      <input type="password" id="regPassword" placeholder="New Password" />
+      <button onclick="register()">Create Account</button>
+    </div>
+  </div>
+
+  
+{% endblock %}
+
+

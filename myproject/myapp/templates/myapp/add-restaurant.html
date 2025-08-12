@@ -1,0 +1,67 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh; background-color: #eceef3ff;">
+    <div class="form-box" style="background-color: #ffffff; padding: 30px 40px; width: 420px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); border-radius: 18px; transition: 0.3s ease;">
+        <h2 style="text-align: center; color: #333; margin-bottom: 25px;">Add Restaurant</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="name">Restaurant Name:</label>
+            <input type="text" name="name" required style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 10px; font-size: 14px;">
+
+            <label for="address">Address:</label>
+            <textarea name="address" required style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 10px; font-size: 14px;"></textarea>
+
+            <label for="total_tables">Total Tables:</label>
+            <input type="number" name="total_tables" required style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 10px; font-size: 14px;">
+            
+            <label for="email">Email Address:</label>
+            <input type="email" name="email" required style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 10px; font-size: 14px;">
+
+            <label for="image">Upload Restaurant Image:</label>
+            <input type="file" name="image" accept="image/*" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 10px; font-size: 14px;">
+
+            <button type="submit" style="width: 100%; padding: 12px; background-color: #f4b400; border: none; border-radius: 10px; color: #fff; font-size: 16px; font-weight: bold; cursor: pointer; transition: background-color 0.3s ease;">Add Restaurant</button>
+        </form>
+
+        <ul id="restaurantList" style="list-style: none; padding: 0; margin-top: 25px;"></ul>
+    </div>
+</div>
+
+<script>
+    let restaurants = [];
+
+    function addRestaurant() {
+        const input = document.getElementById("restaurantName");
+        const name = input.value.trim();
+        if (name === "") {
+            alert("Please enter a restaurant name.");
+            return;
+        }
+        restaurants.push(name);
+        input.value = "";
+        showRestaurants();
+    }
+
+    function showRestaurants() {
+        const list = document.getElementById("restaurantList");
+        list.innerHTML = "";
+        restaurants.forEach((restaurant, index) => {
+            list.innerHTML += `
+                <li style="background-color: #fef3dc; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 10px; font-size: 15px;">
+                    ${restaurant}
+                    <button class="delete-btn" onclick="removeRestaurant(${index})" style="background-color: #e74c3c; border: none; color: white; padding: 2px 4px; border-radius: 8px; cursor: pointer; font-size: 13px; width: 25%;">Delete</button>
+                </li>
+            `;
+        });
+    }
+
+    function removeRestaurant(index) {
+        restaurants.splice(index, 1);
+        showRestaurants();
+    }
+</script>
+{% endblock %}

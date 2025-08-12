@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Restaurant Admin</title>
+    <link rel="stylesheet" href="{% static 'myapp/vendors/typicons.font/font/typicons.css' %}">
+    <link rel="stylesheet" href="{% static 'myapp/vendors/css/vendor.bundle.base.css'%}">
+    <link rel="stylesheet" href="{% static 'myapp/css/vertical-layout-light/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'myapp/images/myresto.png'%}">
+</head>
+<body>
+<div class="container-scroller">
+    <!-- NAVBAR -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            <a class="navbar-brand" href="index.html" style="font-size: 30px; font-weight: bold; font-family: 'Cousine',monospace; color: #05084fff;">
+                🍽 MyResto
+            </a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+            <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item nav-profile dropdown">
+                    <a class="nav-link" href="{% url 'logout' %}">
+                        <i class="mdi mdi-logout"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- SIDEBAR -->
+    <div class="container-fluid page-body-wrapper">
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <div class="d-flex sidebar-profile">
+                        <div class="sidebar-profile-image">
+                            <img src="{% static 'myapp/images/imgadmin.webp' %}" alt="Admin Profile Picture">
+                        </div>
+                        <div class="sidebar-profile-name">
+                            <p class="sidebar-name">Hello Admin</p>
+                            <p class="sidebar-designation">Welcome</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin_panel' %}">
+                        <i class="typcn typcn-device-desktop menu-icon"></i>
+                        <span class="menu-title">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add_restaurant' %}">
+                        <i class="typcn typcn-film menu-icon"></i>
+                        <span class="menu-title">Add Restaurant</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'manage_employees' %}">
+                        <i class="typcn typcn-user-add-outline menu-icon"></i>
+                        <span class="menu-title">Manage Employees</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+  <a class="nav-link" href="{%url 'reports_view'%}">
+    <i class="typcn typcn-chart-bar-outline menu-icon"></i>
+    <span class="menu-title">Reports & Insights</span>
+  </a>
+</li>
+            </ul>
+        </nav>
+
+        <!-- MAIN PANEL -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                {% block content %}
+                
+                {% endblock %}
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-center text-sm-left d-block d-sm-inline-block">© 2025 MyResto Admin Panel</span>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<!-- JS Files -->
+<script src="{% static 'myapp/vendors/js/vendor.bundle.base.js'%}"></script>
+<script src="{% static 'myapp/js/off-canvas.js'%}"></script>
+<script src="{% static 'myapp/js/template.js'%}"></script>
+</body>
+</html>

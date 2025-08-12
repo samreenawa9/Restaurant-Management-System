@@ -1,0 +1,108 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-6">
+        <h3 class="mb-0 font-weight-bold">📊 Reports & Insights</h3>
+    </div>
+</div>
+
+
+<!-- CHARTS SECTION -->
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Bookings per Day</h4>
+                <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Top Restaurants</h4>
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Revenue Distribution</h4>
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Guests per Booking</h4>
+                <canvas id="histChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Line Chart
+    new Chart(document.getElementById('lineChart'), {
+        type: 'line',
+        data: {
+            labels: {{ dates|safe }},
+            datasets: [{
+                label: 'Bookings',
+                data: {{ counts|safe }},
+                borderColor: 'royalblue',
+                backgroundColor: 'rgba(65,105,225,0.2)',
+                fill: true,
+                tension: 0.3
+            }]
+        }
+    });
+
+    // Bar Chart
+    new Chart(document.getElementById('barChart'), {
+        type: 'bar',
+        data: {
+            labels: {{ rest_names|safe }},
+            datasets: [{
+                label: 'Bookings',
+                data: {{ rest_counts|safe }},
+                backgroundColor: 'rgba(54, 162, 235, 0.7)'
+            }]
+        }
+    });
+
+    // Pie Chart
+    new Chart(document.getElementById('pieChart'), {
+        type: 'pie',
+        data: {
+            labels: {{ revenue_labels|safe }},
+            datasets: [{
+                data: {{ revenue_values|safe }},
+                backgroundColor: ['#ff6384','#36a2eb','#ffcd56','#4bc0c0','#9966ff']
+            }]
+        }
+    });
+
+    // Histogram (Guests)
+    new Chart(document.getElementById('histChart'), {
+        type: 'bar',
+        data: {
+            labels: {{ guest_bins|safe }},
+            datasets: [{
+                label: 'Bookings Count',
+                data: {{ guest_counts|safe }},
+                backgroundColor: 'rgba(255,99,132,0.7)'
+            }]
+        }
+    });
+</script>
+
+{% endblock %}

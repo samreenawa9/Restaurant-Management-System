@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Menu Item</title>
+
+    <!-- Bootstrap CSS from your static folder -->
+    <link rel="stylesheet" href="{% static 'myapp/vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'myapp/css/vertical-layout-light/style.css' %}">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Add New Menu Item</h3>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label for="name">Dish Name</label>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Enter dish name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" class="form-control" rows="3" placeholder="Enter dish description"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price">Price (Rs.)</label>
+                            <input type="number" name="price" id="price" step="0.01" class="form-control" placeholder="Enter price" required>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-success">Add Item</button>
+                            <a href="{% url 'restaurant_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS Files -->
+<script src="{% static 'myapp/vendors/js/vendor.bundle.base.js' %}"></script>
+<script src="{% static 'myapp/js/off-canvas.js' %}"></script>
+<script src="{% static 'myapp/js/template.js' %}"></script>
+</body>
+</html>

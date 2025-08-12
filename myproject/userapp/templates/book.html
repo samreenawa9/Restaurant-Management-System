@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="booking-container">
+    <h2>Book Your Table</h2>
+    <form class="booking-form" method="POST">
+        {% csrf_token %}
+
+        <label>Your Name</label>
+        <input type="text" name="customer_name" placeholder="Enter Your Name" required>
+
+        <label>Email Address</label>
+        <input type="email" name="email" placeholder="eg. name@email.com" required>
+
+        <label>Contact Number</label>
+        <input type="tel" name="contact" placeholder="03*********" required>
+
+        <label>Booking Date</label>
+        <input type="date" name="booking_date" required>
+
+        <label>Time</label>
+        <input type="time" name="booking_time" required>
+
+        <label>Number of Guests</label>
+        <input type="number" name="guests" placeholder="Number of Guests" required>
+
+        <label>Choose Restaurant</label>
+        <select name="restaurant" required>
+            <option value="" disabled selected>Choose Your Favourite One</option>
+            {% for r in restaurants %}
+                <option value="{{ r.id }}">{{ r.name }}</option>
+            {% endfor %}
+        </select>
+
+
+
+        <button type="submit">Book Now</button>
+    </form>
+</div>
+{% endblock %}

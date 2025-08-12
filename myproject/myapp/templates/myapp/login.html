@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'myapp/vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'myapp/css/vertical-layout-light/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'myapp/images/favicon.png' %}">
+</head>
+<body>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="w-100 mx-auto" style="max-width: 400px;">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title text-center mb-4">Login</h4>
+                        <form method="POST" class="forms-sample">
+                            {% csrf_token %}
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-danger">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
+
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS Files -->
+<script src="{% static 'myapp/vendors/js/vendor.bundle.base.js' %}"></script>
+<script src="{% static 'myapp/js/off-canvas.js' %}"></script>
+<script src="{% static 'myapp/js/template.js' %}"></script>
+</body>
+</html>
+

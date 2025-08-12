@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-5 display-4">Create Your Dish</h2>
+
+    <!--  BURGER SECTION -->
+    <div class="card mb-4 shadow-sm rounded-4">
+        <div class="card-body">
+            <h5 class="card-title">🍔 Burger</h5>
+
+            <div class="mb-2">
+                <input type="checkbox" class="ingredient-burger" data-price="50" id="lettuce-burger">
+                <label for="lettuce-burger">Lettuce (Rs. 50)</label>
+            </div>
+            <div class="mb-2">
+                <input type="checkbox" class="ingredient-burger" data-price="70" id="cheese-burger">
+                <label for="cheese-burger">Cheese (Rs. 70)</label>
+            </div>
+            <div class="mb-2">
+                <input type="checkbox" class="ingredient-burger" data-price="100" id="chicken-burger">
+                <label for="chicken-burger">Chicken Patty (Rs. 100)</label>
+            </div>
+
+            <p id="burgerTotalCost" class="fw-bold text-primary mt-2">Total Cost: Rs. 0</p>
+        </div>
+    </div>
+
+    <!--  PIZZA SECTION -->
+    <div class="card mb-4 shadow-sm rounded-4">
+        <div class="card-body">
+            <h5 class="card-title">🍕 Pizza</h5>
+
+            <div class="mb-2">
+                <input type="checkbox" class="ingredient-pizza" data-price="80" id="cheese-pizza">
+                <label for="cheese-pizza">Cheese (Rs. 80)</label>
+            </div>
+            <div class="mb-2">
+                <input type="checkbox" class="ingredient-pizza" data-price="90" id="pepperoni-pizza">
+                <label for="pepperoni-pizza">Pepperoni (Rs. 90)</label>
+            </div>
+            <div class="mb-2">
+                <input type="checkbox" class="ingredient-pizza" data-price="60" id="olives-pizza">
+                <label for="olives-pizza">Olives (Rs. 60)</label>
+            </div>
+
+            <p id="pizzaTotalCost" class="fw-bold text-primary mt-2">Total Cost: Rs. 0</p>
+        </div>
+    </div>
+
+    <!-- PASTA SECTION -->
+    <div class="card mb-4 shadow-sm rounded-4">
+        <div class="card-body">
+            <h5 class="card-title"> 🍝 Pasta</h5>
+
+            <div class="mb-2">
+                <input type="checkbox" class="ingredient-pasta" data-price="70" id="sauce-pasta">
+                <label for="sauce-pasta">Tomato Sauce (Rs. 70)</label>
+            </div>
+            <div class="mb-2">
+                <input type="checkbox" class="ingredient-pasta" data-price="50" id="cheese-pasta">
+                <label for="cheese-pasta">Cheese (Rs. 50)</label>
+            </div>
+            <div class="mb-2">
+                <input type="checkbox" class="ingredient-pasta" data-price="90" id="chicken-pasta">
+                <label for="chicken-pasta">Chicken (Rs. 90)</label>
+            </div>
+
+            <p id="pastaTotalCost" class="fw-bold text-primary mt-2">Total Cost: Rs. 0</p>
+        </div>
+    </div>
+</div>
+
+<!-- ✅ Link to recipes.js -->
+<script src="{% static 'js/recipes.js' %}"></script>
+{% endblock %}
